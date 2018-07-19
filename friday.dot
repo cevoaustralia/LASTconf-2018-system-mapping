@@ -1,0 +1,112 @@
+digraph electricty {
+  label="Electricity -- how does it work?"
+  rankdir="TB"
+  compound="true"
+  mclimit=10
+  overlap="scale" // really for neato layout but doesn't harm dot layout
+  splines="true"
+  model="subset"
+
+  // ratio="1.7778" // 1080p portrait
+
+  ratio="0.5625" // 1080p landscape
+
+  // defaults for the whole graph
+  graph [fontname="helvetica" fontsize="30"]
+  edge [fontname="helvetica" fontsize="30" penwidth="2"]
+  node [shape="septagon" style="filled" fillcolor="#ff3f00" fontname="helvetica" fontsize="30"]
+
+  { // Classes of humans (eg "real estate agents", "used car salespeople")
+    node [shape="ellipse" fillcolor="#5f7fff"]
+  }
+
+  { // Individual Human actors (actual people with specific names)
+    node [shape="ellipse" fillcolor="#afcfff"]
+  }
+
+  { // External (3rd party) entities, outside control of the house
+    node [shape="ellipse" fillcolor="#00ef00"]
+  }
+
+  { // External services (eg API gateways) where multiple streams of data from different
+    // producer-consumer relationships flow through the same service
+    // We model this as a shape using HTML-like labels which means that we can control
+    // which "port" on the node an edge can point to.
+    // Some of the markup is only available via the SVG renderer, so we may have to
+    // generate PNGs _from_ the SVGs instead of directly.
+    //
+
+    node [shape="plain" fillcolor="#00ef00"]
+    /*
+    api_gw           [label=<
+      <table cellspacing="0" cellpadding="10">
+        <tr><td bgcolor="#003f00"><font color="#00ff00">API-GW</font></td></tr>
+        <tr><td port="default">default</td></tr>
+      </table> 
+    >]
+    */
+  }
+
+  { // Documents, emails and so forth
+    node [shape="note" fillcolor="palegoldenrod"]
+  }
+
+  { // Internal COTS (off the shelf) systems
+    node [shape="box3d" fillcolor="palevioletred"]
+  }
+
+  { // Monoliths -- big blocks of as-yet unexplored or un-decomposed system
+    node [shape="rectangle" fillcolor="grey75"]
+  }
+
+  { // UI elements like websites
+    node [shape="house" fillcolor="#af7f7f"]
+  }
+
+  { // Specific (micro) services
+    node [shape="component" fillcolor="lightsalmon"]
+  }
+
+  { // APIs
+    node [shape="cds" fillcolor="#9f9fcf"]
+  }
+
+  { // databases
+    node [shape="cylinder" fillcolor="yellow"]
+  }
+
+  { // User interfaces, like desktop/mobile apps
+    node [shape="trapezium" fillcolor="#afcfff"]
+  }
+
+  { // data stores / folders
+    node [shape="folder" fillcolor="#00af7f"]
+  }
+
+  { // logfiles and whatnot
+    node [shape="folder" fillcolor="palegoldenrod"]
+  }
+
+  { // REDIS
+    node [shape="cylinder" fillcolor="orange"]
+  }
+
+  { // MQ topics
+    node [shape="note" fillcolor="orange1"]
+  }
+
+  { // workflow/human-interactive systems -- stuff that is done by eg call centres
+    node [shape="rpromoter" fillcolor="#ffdfdf"]
+  }
+
+  { // Caches
+    node [shape="cylinder" fillcolor="#afaf30"]
+  }
+
+  { // Hardware
+    node [shape="box3d" fillcolor="yellow"]
+  }
+
+}
+
+// vi:ts=2 sw=2 expandtab ai
