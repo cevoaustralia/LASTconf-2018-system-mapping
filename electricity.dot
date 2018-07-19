@@ -18,6 +18,7 @@ digraph electricty {
 
   { // Classes of humans (eg "real estate agents", "used car salespeople")
     node [shape="ellipse" fillcolor="#5f7fff"]
+    Light_Seers
   }
 
   { // Individual Human actors (actual people with specific names)
@@ -26,6 +27,10 @@ digraph electricty {
 
   { // External (3rd party) entities, outside control of the house
     node [shape="ellipse" fillcolor="#00ef00"]
+
+    operators
+    retailer
+    distributor
   }
 
   { // External services (eg API gateways) where multiple streams of data from different
@@ -49,6 +54,7 @@ digraph electricty {
 
   { // Documents, emails and so forth
     node [shape="note" fillcolor="palegoldenrod"]
+    electricity_bill
   }
 
   { // Internal COTS (off the shelf) systems
@@ -57,6 +63,7 @@ digraph electricty {
 
   { // Monoliths -- big blocks of as-yet unexplored or un-decomposed system
     node [shape="rectangle" fillcolor="grey75"]
+    electrons
   }
 
   { // UI elements like websites
@@ -102,6 +109,41 @@ digraph electricty {
   { // Caches
     node [shape="cylinder" fillcolor="#afaf30"]
   }
+
+  { // Hardware
+    node [shape="box3d" fillcolor="yellow"]
+    lights
+    wiring
+    switch
+
+    generator
+    mains
+
+    fuel
+
+    transmission_lines
+    power_station
+  }
+
+  electrons
+
+  lights -> electrons
+  lights -> wiring -> switch
+
+  Light_Seers -> lights
+  switch -> Light_Seers
+
+  electrons -> wiring
+  electrons -> generator -> fuel
+  electrons -> mains
+  electrons -> transmission_lines -> power_station
+
+  power_station -> operators
+
+  Light_Seers -> electricity_bill [dir=both]
+
+  mains -> transmission_lines -> electricity_bill
+  electricity_bill -> retailer -> distributor -> power_station 
 
 }
 
