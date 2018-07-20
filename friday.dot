@@ -1,5 +1,5 @@
 digraph electricty {
-  label="Electricity -- how does it work?"
+  label="Lights -- how do they work?"
   rankdir="TB"
   compound="true"
   mclimit=10
@@ -18,6 +18,8 @@ digraph electricty {
 
   { // Classes of humans (eg "real estate agents", "used car salespeople")
     node [shape="ellipse" fillcolor="#5f7fff"]
+    Cats
+    People
   }
 
   { // Individual Human actors (actual people with specific names)
@@ -25,7 +27,10 @@ digraph electricty {
   }
 
   { // External (3rd party) entities, outside control of the house
-    node [shape="ellipse" fillcolor="#00ef00"]
+    node [shape="ellipse" fillcolor="green"]
+    Generation_System
+    Distribution_System
+    Retailer
   }
 
   { // External services (eg API gateways) where multiple streams of data from different
@@ -49,6 +54,8 @@ digraph electricty {
 
   { // Documents, emails and so forth
     node [shape="note" fillcolor="palegoldenrod"]
+    bill
+    money
   }
 
   { // Internal COTS (off the shelf) systems
@@ -57,6 +64,7 @@ digraph electricty {
 
   { // Monoliths -- big blocks of as-yet unexplored or un-decomposed system
     node [shape="rectangle" fillcolor="grey75"]
+    electricity
   }
 
   { // UI elements like websites
@@ -101,11 +109,34 @@ digraph electricty {
 
   { // Caches
     node [shape="cylinder" fillcolor="#afaf30"]
+    Energy_Source
+    Gravity
   }
 
   { // Hardware
     node [shape="box3d" fillcolor="yellow"]
+    lights
+    cables
+    switch
   }
+
+  lights -> cables
+  lights -> electricity
+  lights -> switch
+  electricity -> cables
+
+  Cats -> lights
+  People -> lights
+  People -> Cats [dir=both]
+
+  electricity -> Distribution_System
+  Generation_System -> Distribution_System
+  Retailer -> money -> People
+  People -> bill -> Retailer
+
+  Energy_Source
+
+  Generation_System -> Energy_Source -> Gravity
 
 }
 
